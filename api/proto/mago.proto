@@ -1,0 +1,25 @@
+// Copyright (c) BeduSec. All rights reserved.
+syntax = "proto3";
+
+package mago;
+
+option go_package = "github.com/bedusec/mago/api/proto";
+
+service Mago {
+  rpc Health (HealthRequest) returns (HealthResponse);
+  rpc ReloadRules (ReloadRulesRequest) returns (ReloadRulesResponse);
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  string status = 1;
+}
+
+message ReloadRulesRequest {
+  string token = 1;
+}
+
+message ReloadRulesResponse {
+  string message = 1;
+}
