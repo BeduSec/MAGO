@@ -1,0 +1,20 @@
+# Copyright (c) BeduSec. All rights reserved.
+version: '3.8'
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  mago:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      MAGO_STORE_TYPE: redis
+      MAGO_REDIS_URL: redis:6379
+      MAGO_CONFIG_FILE: /etc/mago/config.yaml
+    volumes:
+      - ./examples/rulesets:/etc/mago/rulesets
+      - ./config.yaml:/etc/mago/config.yaml
+    depends_on:
+      - redis
