@@ -1,0 +1,10 @@
+# Copyright (c) BeduSec. All rights reserved.
+linters:
+  enable:
+    - gofmt
+    - govet
+    - staticcheck
+    - errcheck
+    - gosimple
+    - ineffassign
+    - unused
