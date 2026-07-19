@@ -1,0 +1,46 @@
+# Copyright (c) BeduSec. All rights reserved.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mago
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mago
+  template:
+    metadata:
+      labels:
+        app: mago
+    spec:
+      containers:
+        - name: mago
+          image: mago:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MAGO_STORE_TYPE
+              value: redis
+            - name: MAGO_REDIS_URL
+              value: redis:6379
+            - name: MAGO_CONFIG_FILE
+              value: /etc/mago/config.yaml
+          volumeMounts:
+            - name: config
+              mountPath: /etc/mago
+      volumes:
+        - name: config
+          configMap:
+            name: mago-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mago
+spec:
+  selector:
+    app: mago
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP
