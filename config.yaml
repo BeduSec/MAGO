@@ -1,0 +1,16 @@
+# Copyright (c) BeduSec. All rights reserved.
+server:
+  host: "0.0.0.0"
+  port: 8080
+store:
+  type: memory
+rate_limiter:
+  default_rate: 100
+  default_burst: 200
+  cleanup_interval_sec: 60
+waf:
+  rules_file: examples/rulesets/default.json
+  dry_run: false
+admin_token: "secret-token"
+log_level: info
+log_json: true
