@@ -1,0 +1,21 @@
+# Copyright (c) BeduSec. All rights reserved.
+rules:
+  - id: block-admin-ips
+    priority: 10
+    action: block
+    conditions:
+      - field: ip
+        operator: eq
+        value: "10.0.0.1"
+      - field: path
+        operator: regex
+        value: "^/admin"
+    match_type: all
+  - id: challenge-bots
+    priority: 20
+    action: block
+    conditions:
+      - field: header.User-Agent
+        operator: contains
+        value: "Bot"
+    match_type: any
