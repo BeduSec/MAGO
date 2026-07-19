@@ -1,0 +1,15 @@
+[
+  {
+    "id": "block-suspicious-path",
+    "priority": 1,
+    "action": "block",
+    "conditions": [
+      {
+        "field": "path",
+        "operator": "regex",
+        "value": ".*\\.\\..*"
+      }
+    ],
+    "match_type": "all"
+  }
+]
